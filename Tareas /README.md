@@ -1,5 +1,5 @@
 # Diplomado
-Diplomado ciencia de datos
+Tareas diplomado ciencia de datos
 
 La base de datos utilizada para la aplicaciòn de R en shiny, es UsuariosLenguasExtranjeras2017
 
