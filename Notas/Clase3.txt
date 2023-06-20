@@ -1,0 +1,160 @@
+CREATE DATABASE myMusic;
+
+-- Comentario 
+
+CREATE TABLE Albums (
+    AlbumID INT PRIMARY KEY,
+    Title VARCHAR (255),
+    Artist VARCHAR (255),
+    RealeaseYear INT,
+    Genre VARCHAR (255),
+    Label VARCHAR (255)
+);
+
+
+-- Agregar fila
+
+INSERT INTO Albums (AlbumID, Title, Artist RealiseYear, Genre, Label) VALUES
+(1, 'Black in Black', 'AC/DC', 1980, 'Rock', 'Atlantic Records');
+
+--Visualizar toda la tabla
+
+SELECT*
+FROM Album;
+
+SELECT Title, Artist
+Form Album;
+
+-- Después de cargar el archivo que envió por whats
+-- Hacer el cambio de base de datos
+
+USE Chinook;
+
+SELECT*
+FROM Artist;
+
+SELECT name FROM sys.tables;
+
+SELECT TOP 5*
+FROM Artist;
+
+SELECT*
+FROM Artist
+WHERE ArtistId = 10;
+
+SELECT*
+FROM Artist
+ORDER BY Name ASC;
+
+SELECT*
+FROM Artist
+ORDER BY Name DES;
+
+SELECT COUNT(*) AS TotalTracks
+FROM Track;
+
+SELECT*
+FROM Invoice;
+
+SELECT SUM(Total) as Ventas
+FROM Invoice;
+
+SELECT*
+FROM Track;
+
+SELECT AVG(Milliseconds) AS Duration
+FROM Track;
+
+SELECT MIN(Milliseconds) AS Min_Track, MAX(Milliseconds) AS Max_Track
+FROM Track;
+
+SELECT*
+FROM Artist;
+
+-- Agregar un nuevo dato, se agrega hasta el final
+
+INSERT INTO Artist(ArtistId, Name) VALUES
+(276, 'Valentin Elizalde')
+
+ALTER TABLE Artist
+ADD Edad INT;
+
+EXEC sp_rename 'Artist.Edad', 'Numero', 'COLUMN';
+
+UPDATE Artist
+SET Name = 'Peso Pluma'
+WHERE ArtistId = 276;
+
+SELECT*
+FROM Track;
+
+SELECT GenreId, COUNT(*) AS Total_Track
+FROM Track
+GROUP BY GenreId
+ORDER BY Total_Track DESC;
+
+SELECT AlbumId, AVG(Milliseconds) AS Duracion
+FROM Track
+GROUP BY AlbumId
+HAVING AVG(Miliseconds) > 231636;
+
+SELECT AlbumId, AVG(Milliseconds) AS Duracion
+FROM Track
+WHERE GenreId = 1
+-- Si se agrupa y luego se quiere filtrar se utiliza HAVING
+GROUP BY AlbumId
+HAVING AVG(Miliseconds) > 231636;
+
+SELECT Track.TrackId, Track.Name, Album.Title
+FROM Track
+INNER JOIN Album ON Track.AlbumId = Album.AlbumId;
+
+SELECT*
+FROM Track;
+
+SELECT*
+FROM Album;
+
+SELECT Customer.CustomerId, Costumer.FirstName, Customer.LastName, Invoice.InvoiceId
+FROM Customer
+LEFT JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId;
+
+SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, Invoice.InvoiceId
+FROM Invoice
+RIGHT JOIN Customer ON Customer.CustomerId = Invoice.CustomerId;
+
+
+SELECT t.TrackId, t.Name AS TrackName, ar.Name AS ArtistName, al.Title AS AlbumTitle
+FROM Track t
+JOIN Album al ON t.AlbumId = al.AlbumId
+JOIN Artist ar ON al.ArtistId = ar.ArtistId
+JOIN Genre g ON t.GenreId = g.GenreId
+WHERE g.Name = 'Rock';
+
+CREATIVE VIEW caciones AS (
+SELECT t.TrackId, t.Name AS TrackName, ar.Name AS ArtistName, al.Title AS AlbumTitle
+FROM Track t
+JOIN Album al ON t.AlbumId = al.AlbumId
+JOIN Artist ar ON al.ArtistId = ar.ArtistId
+JOIN Genre g ON t.GenreId = g.GenreId
+WHERE g.Name = 'Rock'
+);
+
+CREATE OR ALTER VIEW caciones AS (
+SELECT t.TrackId, t.Name AS TrackName, ar.Name AS ArtistName, al.Title AS AlbumTitle
+FROM Track t
+JOIN Album al ON t.AlbumId = al.AlbumId
+JOIN Artist ar ON al.ArtistId = ar.ArtistId
+JOIN Genre g ON t.GenreId = g.GenreId
+);
+
+SELECT*
+FROM canciones;
+
+SELECT DISTINTIC ArtistName
+FROM canciones;
+
+SELECT COUNT(DISTINTIC ArtistName)
+FROM canciones;
+
+DROP VIEW canciones;
